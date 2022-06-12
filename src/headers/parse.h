@@ -3,12 +3,11 @@
 #define BUF_SIZE 256
 #include <string.h>
 #include <stdio.h>
-char buffer[BUF_SIZE];
-char *key;
-char *value;
-char *parse(FILE *fp, char *flag)
+char *p_to_char(FILE *ptr, char *flag)
 {
-    while (fgets(buffer, BUF_SIZE, fp))
+    char buffer[BUF_SIZE];
+    char *key, *value;
+    while (fgets(buffer, BUF_SIZE, ptr))
     {
         key = strtok_r(buffer, "=", &value);
         if (strcmp(key, flag) == 0)
@@ -17,4 +16,39 @@ char *parse(FILE *fp, char *flag)
         }
     }
 }
+int p_to_int(FILE *ptr, char *flag)
+{
+    char buffer[BUF_SIZE];
+    char *key, *value;
+    while (fgets(buffer, BUF_SIZE, ptr))
+    {
+        key = strtok_r(buffer, "=", &value);
+        if (strcmp(key, flag) == 0)
+        {
+            return atoi(value);
+        }
+    }
+}
+unsigned int p_to_unsigned_int(FILE *ptr, char *flag)
+{
+    char buffer[BUF_SIZE];
+    char *key, *value;
+    while (fgets(buffer, BUF_SIZE, ptr))
+    {
+        key = strtok_r(buffer, "=", &value);
+        if (strcmp(key, flag) == 0)
+        {
+            if ((unsigned int uint = atoi(value)) != atoi(value))
+            {
+                return EXIT_FAILURE;
+            }
+            else
+            {
+                return uint;
+            }
+        }
+    }
+}
+
+
 #endif

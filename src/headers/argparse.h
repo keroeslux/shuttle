@@ -28,7 +28,6 @@ bool *parse_arg(int size, char **argv, char *flag, char *out)
     else
     {
         int temp = 0;
-        printf("%d\n", size);
         while(temp<size)
         {
             if(strcmp(argv[temp],flag)==0)
