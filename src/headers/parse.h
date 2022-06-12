@@ -38,13 +38,13 @@ unsigned int p_to_unsigned_int(FILE *ptr, char *flag)
         key = strtok_r(buffer, "=", &value);
         if (strcmp(key, flag) == 0)
         {
-            if ((unsigned int uint = atoi(value)) != atoi(value))
+            if ((unsigned int xint = atoi(value)) != atoi(value))
             {
                 return EXIT_FAILURE;
             }
             else
             {
-                return uint;
+                return xint;
             }
         }
     }
