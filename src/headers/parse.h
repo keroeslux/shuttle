@@ -1,7 +1,7 @@
 #ifndef PARSE_H
 #define PARSE_H
 #include <string.h>
-#define BUF_SIZE 256
+#define BUF_SIZE 256 
 #include <stdio.h>
 #include <stdlib.h>
 #include "./log.h"
@@ -14,17 +14,26 @@ char *p_to_char(FILE *ptr, char *flag)
     while (fgets(buffer, BUF_SIZE, ptr))
     {
         key = strtok_r(buffer, "=", &value);
-        if (sizeof(buffer) > BUF_SIZE)
+        if (strlen(flag) > BUF_SIZE)
         {
             free(buffer);
-            error("Buffer Overflow. Aborting.");
+            error("Buffer Overflow. Aborting");
             abort();
         }
         else
         {
-            if (strcmp(key, flag) == 0)
+            if (sizeof(buffer) > BUF_SIZE)
             {
-                 return (value);
+                free(buffer);
+                error("Buffer Overflow. Aborting.");
+                abort();
+            }
+            else
+            {
+                if (strcmp(key, flag) == 0)
+                {
+                    return (value);
+                }
             }
         }
     }
