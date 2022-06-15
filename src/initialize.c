@@ -7,8 +7,8 @@ int main()
     FILE *ptr;
     reset();
     ptr = fopen("config", "r");
-    char *sus = p_to_char(ptr, "amongus");
-    puts(sus);
+    char *sus = p_to_char(ptr, "Welkommen");
+    printf("%s", sus);
 }
 
 

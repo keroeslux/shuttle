@@ -6,16 +6,18 @@
 #include <stdlib.h>
 #include "./log.h"
 #include "./colors.h"
-char *p_to_char(FILE *ptr, char *flag)
+
+static char *p_to_char(FILE *ptr, char *flag)
 {
     char *buffer;
-    buffer = malloc(BUF_SIZE);
+    buffer = malloc(BUF_SIZE + sizeof(char *));
     char *key, *value;
     while (fgets(buffer, BUF_SIZE, ptr))
     {
         key = strtok_r(buffer, "=", &value);
         if (strlen(flag) > BUF_SIZE)
         {
+            printf("SIZE: %d :: Please lower flag to %d\n", strlen(flag), BUF_SIZE);
             free(buffer);
             error("Buffer Overflow. Aborting");
             abort();
@@ -32,65 +34,84 @@ char *p_to_char(FILE *ptr, char *flag)
             {
                 if (strcmp(key, flag) == 0)
                 {
-                    return (value);
+                    return (value); /* Dont forget to free */
                 }
             }
         }
     }
     exit(0);
 }
-int p_to_int(FILE *ptr, char *flag)
+static int p_to_char(FILE *ptr, char *flag)
 {
     char *buffer;
+    buffer = malloc(BUF_SIZE + sizeof(char *));
     char *key, *value;
     while (fgets(buffer, BUF_SIZE, ptr))
     {
         key = strtok_r(buffer, "=", &value);
-        if (sizeof(buffer) > sizeof(BUF_SIZE))
+        if (strlen(flag) > BUF_SIZE)
         {
-            buffer = malloc(sizeof(BUF_SIZE) + sizeof(key));
-            error("Buffer Overflow. Attempting to rescue.");
-            reset();
+            printf("SIZE: %d :: Please lower flag to %d\n", strlen(flag), BUF_SIZE);
+            free(buffer);
+            error("Buffer Overflow. Aborting");
+            abort();
         }
         else
         {
-            if (strcmp(key, flag) == 0)
+            if (sizeof(buffer) > BUF_SIZE)
             {
-                return atoi(value);
+                free(buffer);
+                error("Buffer Overflow. Aborting.");
+                abort();
+            }
+            else
+            {
+                if (strcmp(key, flag) == 0)
+                {
+                    return atoi(value); /* Dont forget to free */
+                }
             }
         }
     }
+    exit(0);
 }
-unsigned int p_to_unsigned_int(FILE *ptr, char *flag)
+static unsigned int p_to_char(FILE *ptr, char *flag)
 {
     char *buffer;
+    buffer = malloc(BUF_SIZE + sizeof(char *));
     char *key, *value;
     while (fgets(buffer, BUF_SIZE, ptr))
     {
         key = strtok_r(buffer, "=", &value);
-        if (sizeof(buffer) > sizeof(BUF_SIZE))
+        if (strlen(flag) > BUF_SIZE)
         {
-            buffer = malloc(sizeof(BUF_SIZE) * sizeof(key));
-            error("Buffer Overflow. Attempting to rescue.");
-            reset();
+            printf("SIZE: %d :: Please lower flag to %d\n", strlen(flag), BUF_SIZE);
+            free(buffer);
+            error("Buffer Overflow. Aborting");
+            abort();
         }
         else
         {
-            if (strcmp(key, flag) == 0)
+            if (sizeof(buffer) > BUF_SIZE)
             {
-                unsigned int xint = atoi(value);
-                if (sizeof(xint) != sizeof(atoi(value)))
+                free(buffer);
+                error("Buffer Overflow. Aborting.");
+                abort();
+            }
+            else
+            {
+                if (strcmp(key, flag) == 0)
                 {
-                    return EXIT_FAILURE;
-                }
-                else
-                {
-                    return xint;
+                    if (atoi(value) < 0)
+                    {
+                        return EXIT_FAILURE;
+                    else
+                        return (unsigned)(atoi(value));
+                    }
                 }
             }
         }
     }
+    exit(0);
 }
-
-
 #endif
