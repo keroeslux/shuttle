@@ -2,6 +2,12 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <stdio.h>
+
+void help_menu()
+{
+    printf("FIX THIS");
+}
+
 void handle_args(int argc, char **argv)
 {
     bool verbose = parse_flag(argc, argv, "-v", "--verbose");
@@ -11,7 +17,14 @@ void handle_args(int argc, char **argv)
     {
         puts("murica");
     }
-    puts(config_file);
+    else if (help == true)
+    {
+        help_menu();
+    }
+    else
+    {
+        puts(config_file);
+    }
 }
 
 int main(int argc, char **argv)

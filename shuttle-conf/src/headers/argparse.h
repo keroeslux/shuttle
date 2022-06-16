@@ -48,4 +48,5 @@ char *parse_arg(int size, char **argv, char *flag_short, char *flag_long)
             }
         }
     }
+    return (char *)EXIT_FAILURE;
 }
