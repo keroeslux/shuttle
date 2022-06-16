@@ -1,16 +1,28 @@
 #ifndef PARSE_H
 #define PARSE_H
 #include <string.h>
+#include <stdbool.h>
 #define BUF_SIZE 256 
 #include <stdio.h>
 #include <stdlib.h>
 #include "./log.h"
 #include "./colors.h"
-
-void make_file(FILE *ptr)
+static bool scan_file(FILE *ptr, char *flag)
 {
-    printf("%s\n", ptr);
+    char *token;
+    char buffer[BUF_SIZE];
+    while(fgets(buffer, BUF_SIZE, ptr))
+    {
+        token = strtok(buffer, " ");
+        if (strcmp(buffer, flag)==0)
+        {
+            return true;
+        }
+    }
+    return false;
+
 }
+
 static char *p_to_char(FILE *ptr, char *flag)
 {
     char *buffer;
@@ -18,6 +30,10 @@ static char *p_to_char(FILE *ptr, char *flag)
     char *key, *value;
     while (fgets(buffer, BUF_SIZE, ptr))
     {
+        if (buffer == "}")
+        {
+            break;
+        }
         key = strtok_r(buffer, "=", &value);
         if (strlen(flag) > BUF_SIZE)
         {
@@ -43,7 +59,7 @@ static char *p_to_char(FILE *ptr, char *flag)
             }
         }
     }
-    exit(0);
+    return (char *)EXIT_FAILURE;
 }
 static int p_to_int(FILE *ptr, char *flag)
 {
@@ -52,6 +68,10 @@ static int p_to_int(FILE *ptr, char *flag)
     char *key, *value;
     while (fgets(buffer, BUF_SIZE, ptr))
     {
+        if (buffer == "}")
+        {
+            break;
+        }
         key = strtok_r(buffer, "=", &value);
         if (strlen(flag) > BUF_SIZE)
         {
@@ -77,7 +97,7 @@ static int p_to_int(FILE *ptr, char *flag)
             }
         }
     }
-    exit(0);
+    return EXIT_FAILURE;
 }
 static unsigned int p_to_unsigned_int(FILE *ptr, char *flag)
 {
@@ -86,6 +106,10 @@ static unsigned int p_to_unsigned_int(FILE *ptr, char *flag)
     char *key, *value;
     while (fgets(buffer, BUF_SIZE, ptr))
     {
+        if (buffer == "}")
+        {
+            break;
+        }
         key = strtok_r(buffer, "=", &value);
         if (strlen(flag) > BUF_SIZE)
         {
@@ -118,6 +142,6 @@ static unsigned int p_to_unsigned_int(FILE *ptr, char *flag)
             }
         }
     }
-    exit(0);
+    return EXIT_FAILURE;
 }
 #endif
