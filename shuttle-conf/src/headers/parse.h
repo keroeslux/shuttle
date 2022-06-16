@@ -7,6 +7,10 @@
 #include "./log.h"
 #include "./colors.h"
 
+void make_file(FILE *ptr)
+{
+    printf("%s\n", ptr);
+}
 static char *p_to_char(FILE *ptr, char *flag)
 {
     char *buffer;
@@ -41,7 +45,7 @@ static char *p_to_char(FILE *ptr, char *flag)
     }
     exit(0);
 }
-static int p_to_char(FILE *ptr, char *flag)
+static int p_to_int(FILE *ptr, char *flag)
 {
     char *buffer;
     buffer = malloc(BUF_SIZE + sizeof(char *));
@@ -75,7 +79,7 @@ static int p_to_char(FILE *ptr, char *flag)
     }
     exit(0);
 }
-static unsigned int p_to_char(FILE *ptr, char *flag)
+static unsigned int p_to_unsigned_int(FILE *ptr, char *flag)
 {
     char *buffer;
     buffer = malloc(BUF_SIZE + sizeof(char *));
@@ -105,7 +109,9 @@ static unsigned int p_to_char(FILE *ptr, char *flag)
                     if (atoi(value) < 0)
                     {
                         return EXIT_FAILURE;
+                    }
                     else
+                    {
                         return (unsigned)(atoi(value));
                     }
                 }
