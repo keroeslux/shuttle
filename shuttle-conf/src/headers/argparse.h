@@ -3,12 +3,12 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <stdbool.h>
-bool parse_flag(int size, char *argv[], char *flag)
+bool parse_flag(int size, char *argv[], char *flag_short, char *flag_long)
 {
     int temp = 0;
     while(temp<size)
     {
-        if(strcmp(argv[temp], flag)==0)
+        if(strcmp(argv[temp], flag_short)==0 || strcmp(argv[temp], flag_long)==0)
         {
             return true;
         }
@@ -19,7 +19,7 @@ bool parse_flag(int size, char *argv[], char *flag)
     }
     return false;
 }
-bool *parse_arg(int size, char **argv, char *flag, char *out)
+char *parse_arg(int size, char **argv, char *flag_short, char *flag_long)
 {
     if((argv[0]) == NULL)
     {
@@ -30,16 +30,16 @@ bool *parse_arg(int size, char **argv, char *flag, char *out)
         int temp = 0;
         while(temp<size)
         {
-            if(strcmp(argv[temp],flag)==0)
+            if(strcmp(argv[temp],flag_short)==0 || strcmp(argv[temp], flag_long)==0)
             {
                 temp+=1;
                 if(temp>=size)
                 {
-                    return false;
+                    exit(1);
                 }
                 else
                 {
-                    out = argv[temp];
+                    return argv[temp]; 
                 }
             }
             else
