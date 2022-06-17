@@ -1,5 +1,5 @@
 CC := gcc
-CFLAGS := -std=c11 -Wall -Werror -O2
+CFLAGS := -std=c11 -Wall -O2
 NAME := shuttle-conf
 FILES := src/shuttle-conf.c
 

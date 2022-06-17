@@ -1,4 +1,5 @@
 #include "./headers/argparse.h"
+#include "./headers/parse.h"
 #include <stdbool.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -10,20 +11,28 @@ void help_menu()
 
 void handle_args(int argc, char **argv)
 {
+    bool vb = false;
     bool verbose = parse_flag(argc, argv, "-v", "--verbose");
     bool help = parse_flag(argc, argv, "-h", "--help");
     char *config_file = parse_arg(argc, argv, "-c", "--config-file");
     if (verbose == true)
     {
-        puts("murica");
+        vb = true;
     }
     else if (help == true)
     {
         help_menu();
     }
+    else if (config_file != (char*)EXIT_FAILURE)
+    {
+        FILE *ptr;
+        ptr = fopen(config_file, "r");
+        int dier = line_num(ptr, "Vim");
+        printf("%d\n",dier);
+    }
     else
     {
-        puts(config_file);
+        puts("No option specified!");
     }
 }
 
