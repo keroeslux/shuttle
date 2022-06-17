@@ -8,35 +8,48 @@
 #include <stdlib.h>
 #include "./log.h"
 #include "./colors.h"
-extern bool scan_file(FILE *ptr, char *flag)
+#include "./extra_functions.h"
+extern bool scan_file(FILE *ptr, const char *path, char *flag)
 {
     char *token;
     char buffer[BUF_SIZE];
-    while(fgets(buffer, BUF_SIZE, ptr))
+    if (check_for_file(path))
     {
-        token = (char*)strtok(buffer, " ");
-        if (strcmp(token, flag)==0)
+        while(fgets(buffer, BUF_SIZE, ptr))
         {
-            return true;
+            token = (char*)strtok(buffer, " ");
+            if (strcmp(token, flag)==0)
+            {
+                return true;
+            }
         }
     }
     return false;
 }
-extern int line_num(FILE *ptr, char *flag)
+extern int line_num(FILE *ptr, const char *path, char *flag)
 {
     int a = 1;
     char buffer[BUF_SIZE];
     char *token;
     char *bufline;
-    while(fgets(buffer, BUF_SIZE, ptr))
+    if (scan_file(ptr, path, flag) == true)
     {
-        token = (char*)strtok(buffer, " ");
-        bufline = (char*)strtok(buffer, "\n");
-        if (strcmp(token, flag)==0 || strcmp(bufline, flag)==0)
+        while(fgets(buffer, BUF_SIZE, ptr))
         {
-            return a;
+            token = (char*)strtok(buffer, " ");
+            bufline = (char*)strtok(buffer, "\n");
+            if (strcmp(token, flag)==0 || strcmp(bufline, flag)==0)
+            {
+                return a;
+            }
+            a++;
         }
-        a++;
+    }
+    else
+    {
+        red();
+        printf("File: `%s` was not found.\n", path);
+        reset();
     }
     return EXIT_FAILURE;
 }

@@ -27,8 +27,7 @@ void handle_args(int argc, char **argv)
     {
         FILE *ptr;
         ptr = fopen(config_file, "r");
-        int dier = line_num(ptr, "Vim");
-        printf("%d\n",dier);
+        int dier = line_num(ptr, config_file, "Vim");
     }
     else
     {
