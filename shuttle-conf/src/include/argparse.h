@@ -1,3 +1,5 @@
+#ifndef ARGS_H
+#define ARGS_H
 #include <string.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -50,3 +52,4 @@ char *parse_arg(int size, char **argv, char *flag_short, char *flag_long)
     }
     return (char *)EXIT_FAILURE;
 }
+#endif

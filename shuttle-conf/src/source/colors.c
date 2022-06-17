@@ -1,5 +1,3 @@
-#ifndef COLORS_H
-#define COLORS_H
 #include <stdio.h>
 
 void red()
@@ -22,4 +20,3 @@ void reset()
     printf("\033[0m");
 }
 
-#endif

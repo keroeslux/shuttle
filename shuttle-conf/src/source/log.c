@@ -1,6 +1,4 @@
-#ifndef LOG_H
-#define LOG_H
-#include "./colors.h"
+#include "../include/colors.h"
 
 void warning(const char *warning)
 {
@@ -27,5 +25,4 @@ void error(const char *error)
     reset();
 }
 
-#endif
 

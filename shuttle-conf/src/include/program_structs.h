@@ -1,3 +1,5 @@
+#ifndef PROGRAM_STRUCTS_H
+#define PROGRAM_STRUCTS_H
 #include <stdbool.h>
 
 struct Vim
@@ -33,3 +35,4 @@ struct Zsh
     char *prompt;
 };
 
+#endif

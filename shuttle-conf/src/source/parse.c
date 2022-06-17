@@ -1,14 +1,12 @@
-#ifndef PARSE_H
-#define PARSE_H
 #include <string.h>
 #include <stdbool.h>
 #define BUF_SIZE 256 
 #include <stdio.h>
 #include <sys/stat.h>
 #include <stdlib.h>
-#include "./log.h"
-#include "./colors.h"
-#include "./extra_functions.h"
+#include "../include/log.h"
+#include "../include/colors.h"
+#include "../include/extra_functions.h"
 extern bool scan_file(FILE *ptr, const char *path, char *flag)
 {
     char *token;
@@ -174,4 +172,3 @@ extern unsigned int p_to_unsigned_int(FILE *ptr, char *flag)
     }
     return EXIT_FAILURE;
 }
-#endif

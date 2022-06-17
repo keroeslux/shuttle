@@ -1,5 +1,5 @@
 #include <sys/stat.h>
-
+#include <stdbool.h>
 
 extern bool check_for_file(const char *path)
 {

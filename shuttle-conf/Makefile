@@ -1,7 +1,7 @@
 CC := gcc
-CFLAGS := -std=c11 -Wall -O2
+CFLAGS := -std=c11 -Wall -O2 
 NAME := shuttle-conf
-FILES := src/shuttle-conf.c
+FILES := src/source/*
 
 default:
 	$(CC) $(CFLAGS) -o $(NAME) $(FILES)
