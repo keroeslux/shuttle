@@ -27,7 +27,7 @@ void handle_args(int argc, char **argv)
     {
         FILE *ptr;
         ptr = fopen(config_file, "r");
-        int dier = line_num(ptr, config_file, "sus");
+        int dier = line_num(ptr, config_file, "flag");
         printf("%d\n",dier);
     }
     else

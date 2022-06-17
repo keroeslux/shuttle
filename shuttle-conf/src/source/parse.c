@@ -30,19 +30,27 @@ extern int line_num(FILE *ptr, const char *path, char *flag)
     char buffer[BUF_SIZE];
     char *token;
     char *bufline;
-    if (check_for_file(path) == true)
+    if (check_for_file(path) == true) // FIX FOR SCAN_FILE !!!!
     {
         while(fgets(buffer, BUF_SIZE, ptr))
         {
             token = strtok(buffer, " ");
             bufline = strtok(buffer, "\n");
-            if (strcmp(token, flag)==0 || strcmp(bufline, flag)==0)
+            if (strcmp(buffer, "\0")==0)
             {
-                return a;
+                a++;
+                puts("blank line");
             }
             else
             {
-                a++;
+                if (strcmp(token, flag)==0 || strcmp(bufline, flag)==0)
+                {
+                    return a;
+                }
+                else
+                {
+                    a++;
+                }
             }
         }
     }
