@@ -30,17 +30,20 @@ extern int line_num(FILE *ptr, const char *path, char *flag)
     char buffer[BUF_SIZE];
     char *token;
     char *bufline;
-    if (scan_file(ptr, path, flag) == true)
+    if (check_for_file(path) == true)
     {
         while(fgets(buffer, BUF_SIZE, ptr))
         {
-            token = (char*)strtok(buffer, " ");
-            bufline = (char*)strtok(buffer, "\n");
+            token = strtok(buffer, " ");
+            bufline = strtok(buffer, "\n");
             if (strcmp(token, flag)==0 || strcmp(bufline, flag)==0)
             {
                 return a;
             }
-            a++;
+            else
+            {
+                a++;
+            }
         }
     }
     else
@@ -48,8 +51,9 @@ extern int line_num(FILE *ptr, const char *path, char *flag)
         red();
         printf("File: `%s` was not found.\n", path);
         reset();
+        return 1;
     }
-    return EXIT_FAILURE;
+    return 1;
 }
 extern char *p_to_char(FILE *ptr, char *flag)
 {
