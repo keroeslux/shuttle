@@ -20,9 +20,23 @@ static bool scan_file(FILE *ptr, char *flag)
         }
     }
     return false;
-
 }
-
+static int line_num(FILE *ptr, char *flag)
+{
+    int a = 1;
+    char buffer[BUF_SIZE];
+    while(fgets(buffer, BUF_SIZE, ptr))
+    {
+        if (strcmp(buffer, flag)==0)
+        {
+            return a;
+        }
+        else
+        {
+            a++;
+        }
+    }
+}
 static char *p_to_char(FILE *ptr, char *flag)
 {
     char *buffer;
