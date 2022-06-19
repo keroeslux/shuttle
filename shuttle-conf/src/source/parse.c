@@ -7,7 +7,55 @@
 #include "../include/log.h"
 #include "../include/colors.h"
 #include "../include/extra_functions.h"
-extern bool scan_file(FILE *ptr, const char *path, char *flag)
+
+static bool scan_yes_no(FILE *ptr, char *flag)
+{
+    char *buffer = malloc(BUF_SIZE * sizeof(bool));
+    char *key, *value;
+    while(fgets(buffer, BUF_SIZE, ptr))
+    {
+        key = strtok_r(buffer, "=", &value);
+        if (strlen(flag) > BUF_SIZE)
+        {
+            printf("SIZE: %d :: Please lower flag to %d\n",(int)strlen(flag), BUF_SIZE);
+            free(buffer);
+            error("Buffer Overflow. Aborting");
+            abort();
+        }
+        else
+        {
+            if (sizeof(buffer) > BUF_SIZE)
+            {
+                free(buffer);
+                error("Buffer Overflow. Aborting");
+                abort();
+            }
+            else
+            {
+                if (strcmp(key, flag)==0)
+                {
+                    if (strcmp(key, "true")==0 || strcmp(key, "on")==0)
+                    {
+                        return true;
+                    else if (strcmp(key, "false")==0 || strcmp(key, "off")==0)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        yellow();
+                        printf("Error: %s is not a valid filter. Returning false",key);
+                        return false;
+                    }
+                }
+
+            }
+        }
+    }
+}
+
+
+static bool scan_file(FILE *ptr, const char *path, char *flag)
 {
     char *token;
     char buffer[BUF_SIZE];
@@ -24,7 +72,7 @@ extern bool scan_file(FILE *ptr, const char *path, char *flag)
     }
     return false;
 }
-extern int line_num(FILE *ptr, const char *path, char *flag)
+static int line_num(FILE *ptr, const char *path, char *flag)
 {
     int a = 1;
     char buffer[BUF_SIZE];
@@ -63,17 +111,13 @@ extern int line_num(FILE *ptr, const char *path, char *flag)
     }
     return 1;
 }
-extern char *p_to_char(FILE *ptr, char *flag)
+static char *p_to_char(FILE *ptr, char *flag)
 {
     char *buffer;
     buffer = malloc(BUF_SIZE + sizeof(char *));
     char *key, *value;
     while (fgets(buffer, BUF_SIZE, ptr))
     {
-        if (buffer == '}')
-        {
-            break;
-        }
         key = (char*)strtok_r(buffer, "=", &value);
         if ((int)strlen(flag) > BUF_SIZE)
         {
@@ -101,17 +145,13 @@ extern char *p_to_char(FILE *ptr, char *flag)
     }
     return (char *)EXIT_FAILURE;
 }
-extern int p_to_int(FILE *ptr, char *flag)
+static int p_to_int(FILE *ptr, char *flag)
 {
     char *buffer;
     buffer = malloc(BUF_SIZE + sizeof(char *));
     char *key, *value;
     while (fgets(buffer, BUF_SIZE, ptr))
     {
-        if (buffer == "}")
-        {
-            break;
-        }
         key = strtok_r(buffer, "=", &value);
         if ((int)strlen(flag) > BUF_SIZE)
         {
@@ -139,17 +179,13 @@ extern int p_to_int(FILE *ptr, char *flag)
     }
     return EXIT_FAILURE;
 }
-extern unsigned int p_to_unsigned_int(FILE *ptr, char *flag)
+static unsigned int p_to_unsigned_int(FILE *ptr, char *flag)
 {
     char *buffer;
     buffer = malloc(BUF_SIZE + sizeof(char *));
     char *key, *value;
     while (fgets(buffer, BUF_SIZE, ptr))
     {
-        if (buffer == "}")
-        {
-            break;
-        }
         key = strtok_r(buffer, "=", &value);
         if ((int)strlen(flag) > BUF_SIZE)
         {

@@ -6,7 +6,7 @@
 
 void help_menu()
 {
-    printf("FIX THIS");
+    printf("FIX THIS\n");
 }
 
 void handle_args(int argc, char **argv)
@@ -25,10 +25,6 @@ void handle_args(int argc, char **argv)
     }
     else if (config_file != (char*)EXIT_FAILURE)
     {
-        FILE *ptr;
-        ptr = fopen(config_file, "r");
-        int dier = line_num(ptr, config_file, "flag");
-        printf("%d\n",dier);
     }
     else
     {
