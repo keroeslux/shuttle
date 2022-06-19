@@ -2,15 +2,58 @@
 #include <stdbool.h>
 #define BUF_SIZE 256 
 #include <stdio.h>
-#include <sys/stat.h>
+#include <stdarg.h> 
 #include <stdlib.h>
 #include "../include/log.h"
 #include "../include/colors.h"
 #include "../include/extra_functions.h"
+/* I should build a function to take multiple strings and find the line of each and return them in an array */
+
+static int *var_line_num(int count, FILE *ptr, const char path, char*, ...);
+{
+    int cc, a = 1, arr[count];
+    char buffer[BUF_SIZE];
+    char *token, *bufline;
+    va_list valist;
+    va_start(valist, flags);
+    fr = va_arg(valist, char*);
+    for (int i = 0;i<=count;i++)
+    {
+        if (check_for_file(path) == true)
+        {
+            while(fgets(buffer, BUF_SIZE, ptr))
+            {
+                token = strtok(buffer, " ");
+                bufline = strtok(buffer, "\n");
+                if (strcmp(token, fr)==0 || strcmp(bufline, fr)==0)
+                {
+                    arr[a] == fr;
+                }
+                else
+                {
+                    a++;
+                    cc = va_arg(valist, char*);
+                    fr = cc;
+                }
+            }
+        }
+        else
+        {
+            red();
+            printf("File: `%s` was not found.\n",path);
+            reset();
+            return 1;
+        }
+    }
+    int ptr = &arr;
+    return ptr;
+
+}
+
 
 static bool scan_yes_no(FILE *ptr, char *flag)
 {
-    char *buffer = malloc(BUF_SIZE * sizeof(bool));
+    char *buffer = malloc(BUF_SIZE);
     char *key, *value;
     while(fgets(buffer, BUF_SIZE, ptr))
     {
@@ -53,8 +96,6 @@ static bool scan_yes_no(FILE *ptr, char *flag)
         }
     }
 }
-
-
 static bool scan_file(FILE *ptr, const char *path, char *flag)
 {
     char *token;
