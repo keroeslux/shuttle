@@ -10,6 +10,19 @@ extern bool check_for_file(const char *path)
 }
 
 
+extern bool touch(const char *path)
+{
+    FILE *ptr;
+    if((ptr = fopen(path, "a"))==0)
+    {
+        return true;
+    } else
+    {
+        return false;
+    }
+}
+
+
 void crash(char *str)
 {
     red();
