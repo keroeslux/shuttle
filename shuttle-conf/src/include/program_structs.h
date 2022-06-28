@@ -14,7 +14,7 @@ struct Vim
     int shiftwidth;
     char mapleader;
     char *encoding;
-}
+};
 
 struct Fish
 {

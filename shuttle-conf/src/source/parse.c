@@ -9,13 +9,13 @@
 #include "../include/extra_functions.h"
 /* I should build a function to take multiple strings and find the line of each and return them in an array */
 
-static int *var_line_num(int count, FILE *ptr, const char path, char*, ...);
+static int *var_line_num(int count, FILE *ptr, const char path, char *far, ...)
 {
     int cc, a = 1, arr[count];
     char buffer[BUF_SIZE];
-    char *token, *bufline;
+    char *token, *bufline, *fr;
     va_list valist;
-    va_start(valist, flags);
+    va_start(valist, far);
     fr = va_arg(valist, char*);
     for (int i = 0;i<=count;i++)
     {
@@ -45,9 +45,7 @@ static int *var_line_num(int count, FILE *ptr, const char path, char*, ...);
             return 1;
         }
     }
-    int ptr = &arr;
-    return ptr;
-
+    return &arr;
 }
 
 
@@ -80,6 +78,7 @@ static bool scan_yes_no(FILE *ptr, char *flag)
                     if (strcmp(key, "true")==0 || strcmp(key, "on")==0)
                     {
                         return true;
+                    }
                     else if (strcmp(key, "false")==0 || strcmp(key, "off")==0)
                     {
                         return false;

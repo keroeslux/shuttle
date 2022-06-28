@@ -3,4 +3,4 @@
 
 bool can_build(struct Vim *vim, char *start)
 {
-    
+}    

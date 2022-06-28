@@ -1,6 +1,7 @@
-#include <sys/stat.h>
 #include <stdbool.h>
+#include <stdlib.h>
 #include "../include/colors.h"
+#include <sys/stat.h>
 extern bool check_for_file(const char *path)
 {
     struct stat buff;
