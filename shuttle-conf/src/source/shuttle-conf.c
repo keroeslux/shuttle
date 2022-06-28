@@ -25,6 +25,9 @@ void handle_args(int argc, char **argv)
     }
     else if (config_file != (char*)EXIT_FAILURE)
     {
+        FILE *ptr = fopen(config_file, "r");
+        int el = line_num(ptr, config_file, "flag");
+        printf("%d\n",el);
     }
     else
     {

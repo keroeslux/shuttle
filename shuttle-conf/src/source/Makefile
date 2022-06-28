@@ -8,7 +8,7 @@ default:
 	$(CC) -c $(FILES)
 
 install:
-	$(CC) $(CFLAGS) -o src/$(NAME) $(OFILES)
+	$(CC) $(CFLAGS) -o $(NAME) $(OFILES)
 
 clean:
 	rm -rf $(OFILES)

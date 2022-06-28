@@ -9,7 +9,7 @@
 #include "../include/extra_functions.h"
 /* I should build a function to take multiple strings and find the line of each and return them in an array */
 
-static int *var_line_num(int count, FILE *ptr, const char *path, char *far, ...)
+int *var_line_num(int count, FILE *ptr, const char *path, char *far, ...)
 {
     int cc, a = 1, arr[count];
     char buffer[BUF_SIZE];
@@ -49,7 +49,7 @@ static int *var_line_num(int count, FILE *ptr, const char *path, char *far, ...)
 }
 
 
-static bool scan_yes_no(FILE *ptr, char *flag)
+bool scan_yes_no(FILE *ptr, char *flag)
 {
     char *buffer = malloc(BUF_SIZE);
     char *key, *value;
@@ -95,7 +95,7 @@ static bool scan_yes_no(FILE *ptr, char *flag)
         }
     }
 }
-static bool scan_file(FILE *ptr, const char *path, char *flag)
+bool scan_file(FILE *ptr, const char *path, char *flag)
 {
     char *token;
     char buffer[BUF_SIZE];
@@ -112,7 +112,7 @@ static bool scan_file(FILE *ptr, const char *path, char *flag)
     }
     return false;
 }
-static int line_num(FILE *ptr, const char *path, char *flag)
+int line_num(FILE *ptr, const char *path, char *flag)
 {
     int a = 1;
     char buffer[BUF_SIZE];
@@ -151,7 +151,7 @@ static int line_num(FILE *ptr, const char *path, char *flag)
     }
     return 1;
 }
-static char *p_to_char(FILE *ptr, char *flag)
+char *p_to_char(FILE *ptr, char *flag)
 {
     char *buffer;
     buffer = malloc(BUF_SIZE + sizeof(char *));
@@ -185,7 +185,7 @@ static char *p_to_char(FILE *ptr, char *flag)
     }
     return (char *)EXIT_FAILURE;
 }
-static int p_to_int(FILE *ptr, char *flag)
+int p_to_int(FILE *ptr, char *flag)
 {
     char *buffer;
     buffer = malloc(BUF_SIZE + sizeof(char *));
@@ -219,7 +219,7 @@ static int p_to_int(FILE *ptr, char *flag)
     }
     return EXIT_FAILURE;
 }
-static unsigned int p_to_unsigned_int(FILE *ptr, char *flag)
+unsigned int p_to_unsigned_int(FILE *ptr, char *flag)
 {
     char *buffer;
     buffer = malloc(BUF_SIZE + sizeof(char *));
