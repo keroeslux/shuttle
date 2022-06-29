@@ -7,4 +7,5 @@
     **3. Shuttle will build the unique config files and read over them again to ensure they are as bloat-free as possible<br>**
     **4. Shuttle will return the locations of the unique config files + any extra information<br>**
 
-    
+TODO: 
+    1.  patch config file in a directory

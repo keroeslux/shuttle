@@ -10,7 +10,15 @@ extern bool check_for_file(const char *path)
     else {return false; }
 }
 
-
+extern int arr_len(char **arr)
+{
+    int i;
+    for (i = 0; arr[i] != NULL; i++)
+    {
+        ;
+    }
+    return i;
+}
 extern bool touch(const char *path)
 {
     FILE *ptr;
