@@ -2,7 +2,7 @@ CC := gcc
 CFLAGS := -Wall -O2 
 NAME := shuttle-conf
 FILES := src/source/*
-OFILES := parse.o colors.o log.o shuttle-conf.o extra_functions.o handle_setup.o
+OFILES := parse.o colors.o log.o shuttle-conf.o extra_functions.o handle_setup.o build.o
 
 
 install:

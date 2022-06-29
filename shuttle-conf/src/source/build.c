@@ -35,7 +35,9 @@ void can_build(const char *path, bool force)
     else
     {
         char buff[3];
-        printf("Found the following: %s :: continue? [y\\n]: ", dump_arr(arr));
+        printf("Found the following: ");
+        dump_arr(arr);
+        printf(" :: continue? [y\\n]: ");
         fgets(buff, 3, stdin);
         if (buff == 'y')
         {
@@ -47,7 +49,3 @@ void can_build(const char *path, bool force)
         }
     }
 }
-}
-}
-}
-}    
