@@ -2,7 +2,7 @@
 #define PROGRAM_STRUCTS_H
 #include <stdbool.h>
 
-const char **structs[] = {"Vim", "Fish", "Bash", "Zsh"};
+const char *structs[] = {"Vim", "Fish", "Bash", "Zsh"};
 
 struct Vim
 {
