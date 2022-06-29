@@ -123,14 +123,9 @@ int line_num(FILE *ptr, const char *path, char *flag)
         while(fgets(buffer, BUF_SIZE, ptr))
         {
             token = strtok(buffer, " ");
-            bufline = strtok(buffer, "\n");
-            if (strcmp(buffer, "\0")==0)
+            if ((strtok(buffer, "\n")) != 0)
             {
-                a++;
-                puts("blank line");
-            }
-            else
-            {
+                bufline = strtok(buffer, "\n");
                 if (strcmp(token, flag)==0 || strcmp(bufline, flag)==0)
                 {
                     return a;
@@ -140,6 +135,10 @@ int line_num(FILE *ptr, const char *path, char *flag)
                     a++;
                 }
             }
+            else
+            {
+                a++;
+            }
         }
     }
     else
@@ -147,9 +146,9 @@ int line_num(FILE *ptr, const char *path, char *flag)
         red();
         printf("File: `%s` was not found.\n", path);
         reset();
-        return 1;
+        return -1;
     }
-    return 1;
+    return -1;
 }
 char *p_to_char(FILE *ptr, char *flag)
 {
