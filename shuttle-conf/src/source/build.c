@@ -1,18 +1,22 @@
 #include <stdbool.h>
 #include <stdlib.h>
-#include "../include/program_structs.h"
+#include "../include/program_options.h"
 #include "../include/parse.h"
 #include "../include/extra_functions.h"
-#define count arr_len(structs)
+#include "../include/build.h"
+const char *options[4] = {"Vim", "Zsh", "Fish", "Bash"};
 
-void build(char **arr) {}
+#define count arr_len(options)
+
+
+void build(char **arr) {printf("building...");}
 
 void dump_arr(char **arr)
 {
     int i = 0;
     while(arr[i] != NULL)
     {
-        printf("%s, ", arr[i]);
+        printf("%s, ", options[i]);
         i++;
     }
 }
@@ -21,11 +25,12 @@ void can_build(const char *path, bool force)
 {
     char *arr[count];
     FILE *ptr = fopen(path, "r");
-    for (int i = 0; structs[i] != NULL; i++)
+    for (int i = 0; options[i] != NULL; i++)
     {
-        if (scan_file(ptr, path, structs[i]) == true)
+        if (scan_file(ptr, path, options[i]) == true)
         {
-            arr[i] = structs[i];
+            printf("ahhh");
+            arr[i] = options[i];
         }
     }
     if (force == true)

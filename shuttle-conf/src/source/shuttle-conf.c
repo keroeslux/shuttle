@@ -1,5 +1,6 @@
 #include "../include/argparse.h"
 #include "../include/parse.h"
+#include "../include/build.h"
 #include <stdbool.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -14,6 +15,7 @@ void handle_args(int argc, char **argv)
     bool vb = false;
     bool verbose = parse_flag(argc, argv, "-v", "--verbose");
     bool help = parse_flag(argc, argv, "-h", "--help");
+    bool force = parse_flag(argc, argv, "-f", "--force");
     char *config_file = parse_arg(argc, argv, "-c", "--config-file");
     if (verbose == true)
     {
@@ -26,9 +28,7 @@ void handle_args(int argc, char **argv)
     else if (config_file != (char*)EXIT_FAILURE)
     {
         FILE *ptr = fopen(config_file, "r");
-        int el = line_num(ptr, config_file, "flag");
-        if (el >= 0)
-            printf("%d\n",el);
+        can_build(config_file, force);
     }
     else
     {
