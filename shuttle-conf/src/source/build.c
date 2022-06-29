@@ -4,9 +4,9 @@
 #include "../include/parse.h"
 #include "../include/extra_functions.h"
 #include "../include/build.h"
-const char *options[4] = {"Vim", "Zsh", "Fish", "Bash"};
+#define BUFFERSIZE 512
+char *options[4] = {"Vim", "Zsh", "Fish", "Bash"};
 
-#define count arr_len(options)
 
 
 void build(char **arr) {printf("building...");}
@@ -16,21 +16,22 @@ void dump_arr(char **arr)
     int i = 0;
     while(arr[i] != NULL)
     {
-        printf("%s, ", options[i]);
+        printf("%s ", arr[i]);
         i++;
     }
 }
 
 void can_build(const char *path, bool force)
 {
-    char *arr[count];
+    char *buffer;
+    char *arr[BUFFERSIZE];
     FILE *ptr = fopen(path, "r");
-    for (int i = 0; options[i] != NULL; i++)
+    for (int i = 0; i<4;i++)
     {
-        if (scan_file(ptr, path, options[i]) == true)
+        buffer = options[i];
+        if (scan_file(ptr, path, buffer)==true)
         {
-            printf("ahhh");
-            arr[i] = options[i];
+            arr[i] = buffer;
         }
     }
     if (force == true)
@@ -39,18 +40,18 @@ void can_build(const char *path, bool force)
     }
     else
     {
-        char buff[3];
-        printf("Found the following: ");
+        char yn;
+        printf("Located: ");
         dump_arr(arr);
-        printf(" :: continue? [y\\n]: ");
-        fgets(buff, 3, stdin);
-        if (buff == 'y')
+        printf(":: Continue? [y\\n]: ");
+        scanf("%c",&yn);
+        if (yn == 'y')
         {
             build(arr);
         }
         else
         {
-            abort();
+            return;
         }
     }
 }

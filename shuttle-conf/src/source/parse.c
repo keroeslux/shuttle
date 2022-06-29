@@ -7,6 +7,7 @@
 #include "../include/log.h"
 #include "../include/colors.h"
 #include "../include/extra_functions.h"
+#include "../include/parse.h"
 /* I should build a function to take multiple strings and find the line of each and return them in an array */
 
 int *var_line_num(int count, FILE *ptr, const char *path, char *far, ...)

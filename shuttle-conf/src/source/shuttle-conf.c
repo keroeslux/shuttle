@@ -1,6 +1,8 @@
 #include "../include/argparse.h"
 #include "../include/parse.h"
 #include "../include/build.h"
+#include "../include/extra_functions.h"
+#include "../include/colors.h"
 #include <stdbool.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -28,7 +30,15 @@ void handle_args(int argc, char **argv)
     else if (config_file != (char*)EXIT_FAILURE)
     {
         FILE *ptr = fopen(config_file, "r");
-        can_build(config_file, force);
+        if (check_for_file(config_file) == true)
+        {
+            can_build(config_file, force);
+        }
+        else
+        {
+            red();
+            printf("File: %s was not found.", config_file);
+        }
     }
     else
     {
